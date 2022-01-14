@@ -4,6 +4,7 @@ import './database/'
 import 'dotenv/config'
 import { routerTeste } from './route/TesteRouter';
 import { routeUser } from './route/UserRouter';
+import { routeChat } from './route/ChatRouter';
 
 const app = express()
 
@@ -16,6 +17,7 @@ app.get("/", (req: Request, res: Response, next: NextFunction) => {
 
 app.use("/teste", routerTeste)
 app.use('/user', routeUser)
+app.use('/chat', routeChat)
 
 app.listen(3002, () => {
     console.log("Rodando na porta 3002")
