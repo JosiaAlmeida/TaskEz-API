@@ -1,0 +1,14 @@
+{
+    "type": "sqlite",
+    "database": "src/database/taskez.sqlite",
+    "entities": [
+        "./src/models/**/*.ts"
+    ],
+    "migrations": [
+        "./src/database/migrations/*.ts"
+    ],
+    "cli": {
+        "migrationsDir": "./src/database/migrations",
+        "entitiesDir": "src/models"
+    }
+}
