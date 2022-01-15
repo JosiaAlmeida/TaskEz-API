@@ -3,7 +3,7 @@ import { Project } from '../models/Project'
 import { ProjectRepository } from '../Repository/ProjectRepository'
 import { GenericService } from "../Service/GenericService";
 
-const Service = new GenericService<Project>(ProjectRepository)
+const Service = new GenericService(ProjectRepository)
 
 class ProjectController {
     async handleList(req: Request, res: Response) {
@@ -21,9 +21,10 @@ class ProjectController {
         res.status(201).json({ service })
     }
     async handleUpdate(req: Request, res: Response) {
-        const b = req.body
-        const service = await Service.execute_update(b.id, { ...b })
-        res.status(201).json({ service })
+        const { title, description, status, id, user_id } = req.body
+        const point = Service.execute_point({ status })
+        const project = await Service.execute_update(id, { user_id, title, description, status, point })
+        res.status(201).json({ project })
     }
     async handleDelete(req: Request, res: Response) {
         const id = req.params['id']

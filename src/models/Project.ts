@@ -32,5 +32,7 @@ class Project {
 
     constructor() {
         if (!this.id) this.id = uuid()
+        if (!this.point) this.point = 0
+        if (!this.status) this.status = 0
     }
 } export { Project }

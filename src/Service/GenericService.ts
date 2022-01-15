@@ -1,6 +1,11 @@
 import { getCustomRepository, Repository } from 'typeorm'
 import { User } from '../models/User'
 
+interface IPoint {
+    id?: string
+    status: string | number | Boolean
+    Point?: number
+}
 
 class GenericService<E>{
     constructor(private repo) { }
@@ -32,6 +37,11 @@ class GenericService<E>{
     async execute_delete(id: string) {
         const repository = getCustomRepository(this.repo) as Repository<E>
         await repository.delete(id)
+    }
+    execute_point({ status }: IPoint) {
+        if (status || status == 2 || status == "active") return 10
+        else if (status == 1) return 5
+        return 0
     }
 
 } export { GenericService }
