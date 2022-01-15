@@ -6,6 +6,7 @@ import { GenericService } from "../Service/GenericService";
 const Service = new GenericService(ProjectRepository)
 
 class ProjectController {
+
     async handleList(req: Request, res: Response) {
         const list = await Service.execute_list()
         return res.status(200).json(list)
@@ -17,11 +18,13 @@ class ProjectController {
     }
     async handleCreate(req: Request, res: Response) {
         const b = req.body
+        b.user_id = req.user_id
         const service = await Service.execute_create({ ...b })
         res.status(201).json({ service })
     }
     async handleUpdate(req: Request, res: Response) {
-        const { title, description, status, id, user_id } = req.body
+        const { title, description, status, id } = req.body
+        const user_id = req.user_id
         const point = Service.execute_point({ status })
         const project = await Service.execute_update(id, { user_id, title, description, status, point })
         res.status(201).json({ project })

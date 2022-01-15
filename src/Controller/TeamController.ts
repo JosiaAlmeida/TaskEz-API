@@ -15,6 +15,7 @@ class TeamController {
     }
     async handleCreate(req: Request, res: Response) {
         const b = req.body
+        b.user_id = req.user_id
         const team = await service.execute_create({ ...b })
         return res.status(201).json(team)
     }

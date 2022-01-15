@@ -14,7 +14,8 @@ class NotifyController {
         return res.status(200).json(notify)
     }
     async execute(req: Request, res: Response) {
-        const { user_id, user_receiver_id, message, status } = req.body
+        const { user_receiver_id, message, status } = req.body
+        const user_id = req.user_id
         const sendMessage = await service.handleCreate({ user_id, user_receiver_id, message, status })
         return res.status(201).json({ sendMessage })
     }

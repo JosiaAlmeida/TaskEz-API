@@ -1,3 +1,4 @@
+import { totalmem } from 'os'
 import { getCustomRepository, Repository } from 'typeorm'
 import { User } from '../models/User'
 
@@ -5,6 +6,10 @@ interface IPoint {
     id?: string
     status: string | number | Boolean
     Point?: number
+}
+
+interface Total {
+    total: number
 }
 
 class GenericService<E>{

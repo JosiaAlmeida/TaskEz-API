@@ -17,11 +17,13 @@ class TaskController {
     }
     async handleCreate(req: Request, res: Response) {
         const b = req.body
+        b.user_id = req.user_id
         const task = await service.execute_create({ ...b })
         return res.status(201).json(task)
     }
     async handleUpdate(req: Request, res: Response) {
-        const { title, description, status, id, project_id, user_id } = req.body
+        const { title, description, status, id, project_id } = req.body
+        const user_id = req.user_id
         const point = service.execute_point({ status })
         const task = await service.execute_update(id, { title, description, status, point, project_id, user_id })
         return res.status(200).json(task)
