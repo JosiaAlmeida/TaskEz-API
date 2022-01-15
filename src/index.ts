@@ -8,6 +8,8 @@ import { routeUser } from './route/UserRouter';
 import { routeChat } from './route/ChatRouter';
 import { routerProject } from "./route/ProjectRouter";
 import { routerTask } from "./route/TaskRouter";
+import { routerTeam } from "./route/TeamRouter";
+import { routeNotify } from "./route/NotifyRouter";
 
 const app = express()
 
@@ -23,6 +25,8 @@ app.use('/user', routeUser)
 app.use('/chat', routeChat)
 app.use('/project', routerProject)
 app.use('/task', routerTask)
+app.use('/team', routerTeam)
+app.use('/notify', routeNotify)
 
 app.listen(3002, () => {
     console.log("Rodando na porta 3002")

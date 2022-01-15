@@ -1,28 +1,27 @@
 import { getCustomRepository } from 'typeorm'
-import { ChatRepository } from '../Repository/ChatRepository'
+import { NotifyRepository } from '../Repository/NotifyRepository'
 import { UserRepository } from '../Repository/UserRepository'
 
-interface IChat {
+interface INotify {
     user_id: string
     user_receiver_id: string
     message: string
     status: string
 }
 
-class ChatService {
-
+class NotifyService {
     async handlList() {
-        const repository = getCustomRepository(ChatRepository)
+        const repository = getCustomRepository(NotifyRepository)
         const findMesseger = await repository.find()
         return findMesseger
     }
     async handleFind(id: string) {
-        const repository = getCustomRepository(ChatRepository)
+        const repository = getCustomRepository(NotifyRepository)
         const findMesseger = await repository.findOneOrFail(id)
         return findMesseger
     }
-    async handleCreate({ user_id, user_receiver_id, message, status }: IChat) {
-        const repository = getCustomRepository(ChatRepository)
+    async handleCreate({ user_id, user_receiver_id, message, status }: INotify) {
+        const repository = getCustomRepository(NotifyRepository)
         const userRepository = getCustomRepository(UserRepository)
         const findMesseger = await repository.find()
         const findUserSend = await userRepository.findOneOrFail(user_id)
@@ -39,11 +38,15 @@ class ChatService {
         return { nome, creadMessage }
     }
     async searchMessage(message: string) {
-        const repository = getCustomRepository(ChatRepository)
+        const repository = getCustomRepository(NotifyRepository)
         const findMesseger = await repository.find()
-        const Search = findMesseger.filter(chat => chat.message.toLowerCase().includes(message.toLowerCase()))
+        const Search = findMesseger.filter(Notify => Notify.message.toLowerCase().includes(message.toLowerCase()))
 
         if (!Search) return "Nao encontramos essa mensagem"
         return Search
     }
-} export { ChatService }
+    async execute_delete(id: string) {
+        const repository = getCustomRepository(NotifyRepository)
+        await repository.delete(id)
+    }
+} export { NotifyService }

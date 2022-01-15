@@ -1,9 +1,9 @@
 import { Request, Response } from 'express'
-import { ChatService } from '../Service/ChatService'
+import { NotifyService } from '../Service/NotifyService'
 
-const service = new ChatService()
+const service = new NotifyService()
 
-class ChatController {
+class NotifyController {
     async execut_list(req: Request, res: Response) {
         const notify = await service.handlList()
         return res.status(200).json(notify)
@@ -24,4 +24,9 @@ class ChatController {
 
         return res.status(200).json(Search)
     }
-} export { ChatController }
+    async elimine(req: Request, res: Response) {
+        const { id } = req.params
+        await service.execute_delete(id)
+        res.status(204).json({ message: "Excluido" })
+    }
+} export { NotifyController }
