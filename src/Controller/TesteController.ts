@@ -6,8 +6,8 @@ import { ProjectRepository } from '../Repository/ProjectRepository'
 class TesteController {
     async handle(req: Request, res: Response) {
         const b = req.body
-        const testeService = new GenericService<Project>()
-        const service = await testeService.execute_create({ ...b }, ProjectRepository)
+        const testeService = new GenericService<Project>(ProjectRepository)
+        const service = await testeService.execute_create({ ...b })
         res.status(201).json({ service })
     }
 } export { TesteController }
