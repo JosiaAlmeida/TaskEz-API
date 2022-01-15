@@ -6,5 +6,6 @@ const routeChat = Router()
 const controller = new ChatController()
 
 routeChat.post('/', controller.execute)
+routeChat.post('/search', controller.search)
 
 export { routeChat }

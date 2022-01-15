@@ -1,11 +1,13 @@
 import { Request, Response } from "express";
-import { TesteService } from "../Service/TesteService";
+import { GenericService } from "../Service/GenericService";
+import { Project } from '../models/Project'
+import { ProjectRepository } from '../Repository/ProjectRepository'
 
 class TesteController {
     async handle(req: Request, res: Response) {
-        const { nome } = req.body
-        const testeService = new TesteService()
-        const service = await testeService.execute(nome)
+        const b = req.body
+        const testeService = new GenericService<Project>()
+        const service = await testeService.execute_create({ ...b }, ProjectRepository)
         res.status(201).json({ service })
     }
 } export { TesteController }

@@ -27,4 +27,12 @@ class ChatService {
         await repository.save(creadMessage)
         return { nome, creadMessage }
     }
+    async searchMessage(message: string) {
+        const repository = getCustomRepository(ChatRepository)
+        const findMesseger = await repository.find()
+        const Search = findMesseger.filter(chat => chat.message.toLowerCase().includes(message.toLowerCase()))
+
+        if (!Search) return "Nao encontramos essa mensagem"
+        return Search
+    }
 } export { ChatService }
