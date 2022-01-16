@@ -6,7 +6,7 @@ interface INotify {
     user_id: string
     user_receiver_id: string
     message: string
-    status: string
+    status?: string
 }
 
 class NotifyService {

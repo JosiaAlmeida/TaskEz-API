@@ -27,6 +27,12 @@ class Team {
     @JoinColumn({ name: "project_id" })
     projectId: string
 
+    @CreateDateColumn()
+    created_up: Date
+
+    @UpdateDateColumn()
+    updated_at: Date
+
     constructor() {
         if (!this.id) this.id = uuid()
     }
